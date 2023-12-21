@@ -3,9 +3,7 @@
 {
 	"name": "Go Dev",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
+	"image": "mcr.microsoft.com/devcontainers/go:1.21",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
@@ -18,17 +16,12 @@
 			"installOhMyZshConfig": true,
 			"upgradePackages": true,
 			"username": "vscode"
-		},
-		"ghcr.io/devcontainers-contrib/features/zsh-plugins": {
-			"omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions",
-			//  https://github.com/zsh-users/zsh-completions https://github.com/zsh-users/zsh-syntax-highlighting",
-			"username": "vscode"
 		}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": 
+	"postCreateCommand": "chmod +x ./.devcontainer/post-install.sh && sh -c ./.devcontainer/post-install.sh",
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
