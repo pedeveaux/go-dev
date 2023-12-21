@@ -2,26 +2,24 @@ package main
 
 import (
 	"fmt"
-	"log/slog"
-	"os"
+	"log"
 	"pedeveaux/go-dev/greetings"
 )
 
-var LogLevel = new(slog.LevelVar)
-
 func main() {
-	// setting the log level
-	LogLevel.Set(slog.LevelDebug - 1)
+	// Set properties of the predefined Logger, including
+	// the log entry prefix and a flag to disable printing
+	// the time, source file, and line number.
+	log.SetPrefix("greetings: ")
+	log.SetFlags(0)
 
-	handler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level: LogLevel,
-	})
-	slog.SetDefault(slog.New(handler))
-
-	// logger := slog.Default()
-	message, err := greetings.Hello("")
+	// A slice of names
+	names := []string{"George", "Michelle", "Randy", "Bobby"}
+	messages, err := greetings.Hellos(names)
 	if err != nil {
-		slog.Error(err.Error())
+		log.Fatal(err)
 	}
-	fmt.Println(message)
+	for _, message := range messages {
+		fmt.Println(message)
+	}
 }

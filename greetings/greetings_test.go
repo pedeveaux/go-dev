@@ -1,24 +1,26 @@
 package greetings
 
 import (
+	"regexp"
 	"testing"
 )
 
-func TestHello(t *testing.T) {
-	tt := []struct {
-		in  string
-		exp string
-	}{
-		{
-			in:  "Mike",
-			exp: "Hi, Mike. Welcome to the Go show !"},
-		{
-			in:  "George",
-			exp: "Hi, George. Welcome to the Go show !"},
+// TestHelloName calls greetings.Hello with a name, checking
+// for a valid return value.
+func TestHelloName(t *testing.T) {
+	name := "Gladys"
+	want := regexp.MustCompile(`\b` + name + `\b`)
+	msg, err := Hello("Gladys")
+	if !want.MatchString(msg) || err != nil {
+		t.Fatalf(`Hello("Gladys") = %q, %v, want match for %#q, nil`, msg, err, want)
 	}
-	for _, tc := range tt {
-		if actual, err := Hello(tc.in); actual != tc.exp {
-			t.Errorf("Expected Hello to be %s but it was %s. Error: %s", tc.exp, actual, err.Error())
-		}
+}
+
+// TestHelloEmpty calls greetings.Hello with an empty string,
+// checking for an error.
+func TestHelloEmpty(t *testing.T) {
+	msg, err := Hello("")
+	if msg != "" || err == nil {
+		t.Fatalf(`Hello("") = %q, %v, want "", error`, msg, err)
 	}
 }

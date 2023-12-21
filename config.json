@@ -1,0 +1,9 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": "6532",
+        "user": "postgres",
+        "password": "magneto",
+        "dbname": "postgres"
+    }
+}

@@ -3,24 +3,32 @@
 {
 	"name": "Go Dev",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	// "image": "golang:1.21-alpine",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
-	// "dockerComposeFile": "docker-compose.yaml",
-	// "service": "dev",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/devcontainers/features/go:1": {}
+		"ghcr.io/devcontainers/features/git": {},
+		"ghcr.io/devcontainers/features/go": {},
+		"ghcr.io/devcontainers/features/common-utils": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"installOhMyZsh": true,
+			"installOhMyZshConfig": true,
+			"upgradePackages": true,
+			"username": "vscode"
+		},
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins": {
+			"omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions",
+			//  https://github.com/zsh-users/zsh-completions https://github.com/zsh-users/zsh-syntax-highlighting",
+			"username": "vscode"
+		}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": 
-	// 	"./scripts/zsh-in-docker.sh -t agnoster -p git -p https://github.com/zsh-users/zsh-autosuggestions -p https://github.com/zsh-users/zsh-completions -p https://github.com/zsh-users/zsh-syntax-highlighting"
-	// ],
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
